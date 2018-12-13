@@ -1,4 +1,4 @@
-package main
+package extract
 
 import (
 	"testing"
@@ -9,7 +9,7 @@ func TestExtractFromHTML(t *testing.T) {
 	expected := `{"@type":"organization","name":"example"}`
 	html := `<html><body><script type="application/ld+json">` + expected + `</script></body></html>"`
 
-	extracted, err := ExtractFromHTML(html)
+	extracted, err := FromHTML(html)
 	if err != nil {
 		t.Fatal(err)
 	}

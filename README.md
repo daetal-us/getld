@@ -32,7 +32,9 @@ package main
 
 import (
 	"log"
-	"github.com/daetal-us/getld"
+	"encoding/json"
+
+	"github.com/daetal-us/getld/extract"
 )
 
 func main() {
@@ -42,7 +44,7 @@ func main() {
 
 func extractFromHTML() {
 	html := `<html><body><script type="application/json+ld>{"@type":"organization","name":"example"}</script></body></html>"`
-	results, err := getld.ExtractFromHTML(html)
+	results, err := extract.FromHTML(html)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,11 +52,11 @@ func extractFromHTML() {
 	if err != nil {
 		log.fatal(err)
 	}
-	fmt.Println(string(encoded)) // [{"@type":"organization","name":"example"}]
+	log.Println(string(encoded)) // [{"@type":"organization","name":"example"}]
 }
 
 func extractFromURL() {
-	results, err := getld.ExtractFromURL("http://apple.com")
+	results, err := extract.FromURL("http://apple.com")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,7 +64,7 @@ func extractFromURL() {
 	if err != nil {
 		log.fatal(err)
 	}
-	fmt.Println(string(encoded)) // [...]
+	log.Println(string(encoded)) // [...]
 }
 ```
 
